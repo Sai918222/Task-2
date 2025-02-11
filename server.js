@@ -33,4 +33,4 @@ app.get("/users", (req, res) => {
     res.json(users);
 });
 
-app.listen(3100, () => console.log("Server running on http://localhost:3100"));
+app.listen(3100, () => console.log("Server running "));
