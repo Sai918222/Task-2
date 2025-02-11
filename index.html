@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body style="
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+">
+    <div style="
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    ">
+        <h2>User Registration</h2>
+        <form id="userForm" action="/submit" method="POST" onsubmit="return validateForm()">
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label for="name" style="font-weight: bold;">Name:</label>
+                <input type="text" id="name" name="name" style="
+                    width: 100%;
+                    padding: 8px;
+                    margin-top: 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 14px;
+                ">
+                <span class="error" id="nameError" style="color: red; font-size: 12px;"></span>
+            </div>
+
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label for="email" style="font-weight: bold;">Email:</label>
+                <input type="email" id="email" name="email" style="
+                    width: 100%;
+                    padding: 8px;
+                    margin-top: 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 14px;
+                ">
+                <span class="error" id="emailError" style="color: red; font-size: 12px;"></span>
+            </div>
+
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label for="password" style="font-weight: bold;">Password:</label>
+                <input type="password" id="password" name="password" style="
+                    width: 100%;
+                    padding: 8px;
+                    margin-top: 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 14px;
+                ">
+                <span class="error" id="passwordError" style="color: red; font-size: 12px;"></span>
+            </div>
+
+            <button type="submit" style="
+                background-color: #28a745;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+            ">
+                Register
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("passwordError").innerText = "";
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            if (name === "") {
+                document.getElementById("nameError").innerText = "Name is required.";
+                isValid = false;
+            }
+
+            if (email === "") {
+                document.getElementById("emailError").innerText = "Email is required.";
+                isValid = false;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById("emailError").innerText = "Invalid email format.";
+                isValid = false;
+            }
+
+            if (password === "") {
+                document.getElementById("passwordError").innerText = "Password is required.";
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
